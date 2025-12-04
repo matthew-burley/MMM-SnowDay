@@ -1,15 +1,10 @@
-# MMM-Template
-Use this template for creating new MagicMirror² modules.
+# MMM-SnowDay
 
-See the [wiki page](https://github.com/Dennis-Rosenbaum/MMM-Template/wiki) for an in depth overview of how to get started.
-
-# MMM-Template
-
-*MMM-Template* is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) that displays ... [Module description]
+*MMM-SnowDay* is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) that displays the percentage chance of getting a snow day tomorrow for a provided postal code.
 
 ## Screenshot
 
-![Example of MMM-Template](./example_1.png)
+![Example of MMM-SnowDay](./example_1.png)
 
 ## Installation
 
@@ -19,7 +14,7 @@ In your terminal, go to the modules directory and clone the repository:
 
 ```bash
 cd ~/MagicMirror/modules
-git clone [GitHub url]
+git clone https://github.com/matthew-burley/MMM-SnowDay/
 ```
 
 ### Update
@@ -27,7 +22,7 @@ git clone [GitHub url]
 Go to the module directory and pull the latest changes:
 
 ```bash
-cd ~/MagicMirror/modules/MMM-Template
+cd ~/MagicMirror/modules/MMM-SnowDay
 git pull
 ```
 
@@ -41,8 +36,11 @@ Minimal configuration to use the module:
 
 ```js
     {
-        module: 'MMM-Template',
-        position: 'lower_third'
+        module: 'MMM-SnowDay',
+        position: 'top_left',
+        config: {
+            postalCode: "H3C 5L2",        // postal code to check (Go Habs Go!)
+        }
     },
 ```
 
@@ -50,10 +48,13 @@ Configuration with all options:
 
 ```js
     {
-        module: 'MMM-Template',
+        module: 'MMM-SnowDay',
         position: 'lower_third',
         config: {
-            exampleContent: 'Welcome world'
+            postalCode: "H3C 5L2",        // postal code to check (Go Habs Go!)
+            city: "Montréal",             // optional manual city name
+            updateInterval: 60 * 60 * 1000, // updates every hour
+            initialDelay: 15000             // delays on startup to avoid RPi boot congestion
         }
     },
 ```
@@ -62,13 +63,10 @@ Configuration with all options:
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
-`exampleContent`|`string`|not available|The content to show on the page
-
-## Sending notifications to the module
-
-Notification|Description
-------|-----------
-`TEMPLATE_RANDOM_TEXT`|Payload must contain the text that needs to be shown on this module
+`postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check
+`city`|`Montréal`|not available|The optional manual city name
+`updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000|The update interval
+`initialDelay`|`15000`|15000|The intial delay on startup to avoid RPi boot congestion
 
 ## Developer commands
 
