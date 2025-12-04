@@ -70,7 +70,7 @@
 .snow-blue { color: #6495ed; }
 .snow-purple { color: #6f42c1; }
 .snow-orange { color: #ed872d; }
-.snow-red { color: #dc3545; }
+.snow-red { color: #b22222; }
 
 /* Adaptive layout for narrow screens */
 @media (max-width: 800px) {
