@@ -82,6 +82,8 @@ Option|Possible values|Default|Description
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) file for details.
 
-## Changelog
+## Acknowledgements
 
-All notable changes to this project will be documented in the [CHANGELOG.md](CHANGELOG.md) file.
+This project is based on the MMM-Template by [Dennis Rosenbaum](https://github.com/Dennis-Rosenbaum/MMM-Template).  
+Honestly Daniel made it so easy to create a module its scary. Thanks a million.
+The original project is licensed under the MIT License.
