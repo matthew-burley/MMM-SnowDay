@@ -1,8 +1,8 @@
 {
-  "name": "mmm-template",
+  "name": "mmm-snowday",
   "version": "1.0.0",
-  "description": "[Module description]",
-  "main": "MMM-Template.js",
+  "description": "A module that displays the percentage chance of getting a snow day tomorrow.",
+  "main": "MMM-SnowDay.js",
   "scripts": {
     "lint": "eslint",
     "lint:fix": "eslint --fix",
@@ -10,17 +10,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+[GitHub url].git"
+    "url": "git+https://github.com/matthew-burley/MMM-SnowDay/.git"
   },
   "keywords": [
-    "template"
+    "magicmirror"
   ],
-  "author": "[Author]",
+  "author": "Mat Burley",
   "license": "MIT",
   "bugs": {
-    "url": "[GitHub url]/issues"
+    "url": "https://github.com/matthew-burley/MMM-SnowDay//issues"
   },
-  "homepage": "[GitHub url]#readme",
+  "homepage": "https://github.com/matthew-burley/MMM-SnowDay/#readme",
   "devDependencies": {
     "@eslint/css": "^0.9.0",
     "@eslint/js": "^9.30.1",
