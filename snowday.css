@@ -1,0 +1,81 @@
+/* Container wrapper to center everything and restrict width */
+.snow-wrapper {
+  text-align: center;
+  margin: 10px auto;
+  font-family: 'Arial', sans-serif;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Title at the top */
+.snow-title {
+  font-size: clamp(14px, 2vw, 28px);
+  font-weight: 600;
+  margin-bottom: 10px;
+  color: #ffffff;
+  text-shadow: 1px 1px 2px #000000;
+  white-space: normal;
+  word-break: break-word;
+  overflow: hidden;
+  text-align: center;
+  max-height: 3em; /* ~2 lines */
+}
+
+/* Percentage container */
+.snow-percent {
+  font-size: clamp(24px, 6vw, 64px);
+  font-weight: 700;
+  margin-top: 10px;
+  display: inline-block;       /* inline for natural wrapping */
+  text-align: center;
+  white-space: normal;         /* allow line breaks */
+  word-break: break-word;      /* break long text if needed */
+  overflow-wrap: anywhere;     /* ensure wrapping anywhere */
+  max-width: 100%;             /* never exceed container */
+  box-sizing: border-box;
+}
+
+/* Snowflake icons */
+.snowflake {
+  font-size: clamp(20px, 4vw, 48px);
+  vertical-align: middle;
+  color: #ace5ee;
+  display: inline-block;
+  animation-name: snow-fall;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+/* Randomized snowflakes using nth-child */
+.snowflake:nth-child(1) { animation-duration: 1.8s; animation-delay: 0s; transform: scale(1); }
+.snowflake:nth-child(2) { animation-duration: 2.2s; animation-delay: 0.2s; transform: scale(0.9); }
+.snowflake:nth-child(3) { animation-duration: 2s; animation-delay: 0.4s; transform: scale(1.1); }
+.snowflake:nth-child(4) { animation-duration: 1.6s; animation-delay: 0.1s; transform: scale(0.85); }
+.snowflake:nth-child(5) { animation-duration: 2.4s; animation-delay: 0.3s; transform: scale(1.05); }
+
+/* Smooth drifting animation */
+@keyframes snow-fall {
+  0% { transform: translateY(0) translateX(0); }
+  50% { transform: translateY(5px) translateX(3px); }
+  100% { transform: translateY(0) translateX(-3px); }
+}
+
+/* Color ranges for percentage */
+.snow-green { color: #28a745; }
+.snow-blue { color: #6495ed; }
+.snow-purple { color: #6f42c1; }
+.snow-orange { color: #ed872d; }
+.snow-red { color: #dc3545; }
+
+/* Adaptive layout for narrow screens */
+@media (max-width: 800px) {
+  .snow-wrapper { margin: 5px auto; }
+  .snow-title { font-size: clamp(12px, 3vw, 20px); max-height: 3em; }
+  .snow-percent { font-size: clamp(18px, 5vw, 48px); }
+  .snowflake { font-size: clamp(16px, 3vw, 36px); }
+}
