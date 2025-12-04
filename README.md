@@ -2,9 +2,13 @@
 
 *MMM-SnowDay* is a module for [MagicMirror²](https://github.com/MagicMirrorOrg/MagicMirror) that displays the percentage chance of getting a snow day tomorrow for a provided postal code.
 
-## Screenshot
+## Screenshot Loading
 
-![Example of MMM-SnowDay](./example_1.png)
+![Example of MMM-SnowDay Loading](./exampleloading.png)
+
+## Screenshot Finished
+
+![Example of MMM-SnowDay](./examplefinished.png)
 
 ## Installation
 
