@@ -64,7 +64,7 @@ Configuration with all options:
 Option|Possible values|Default|Description
 ------|------|------|-----------
 `postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check
-`city`|`Montréal`|not available|The optional manual city name
+`city`|`Montréal`|""|The optional manual city name
 `updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000|The update interval
 `initialDelay`|`15000`|15000|The intial delay on startup to avoid RPi boot congestion
 
