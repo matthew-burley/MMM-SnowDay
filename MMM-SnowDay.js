@@ -80,7 +80,7 @@ Module.register("MMM-SnowDay", {
     // puts HTML directly into the wrapper
     wrapper.innerHTML = `
       <div class="snow-title">${titleText}</div>
-      <div class="snow-percent">${this.templateContent || "❄❄snowing❄❄"}</div>
+      <div class="snow-percent">${this.templateContent || "❄snowing❄"}</div>
     `;
 
     return wrapper;
