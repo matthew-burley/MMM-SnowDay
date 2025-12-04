@@ -47,10 +47,12 @@ Module.register("MMM-SnowDay", {
       let value = parseFloat(rawValue);
 
       // Pick a color class based on seriousness of the snow chance
-      let colorClass = "snow-red"; // Default color
+      let colorClass = "snow-red"; // Default color (No chance)
       if (!isNaN(value)) {
-        if (value > 90) colorClass = "snow-green";   // Very high chance
-        else if (value >= 30) colorClass = "snow-purple"; // Moderate chance
+        if (value >= 90) colorClass = "snow-green";   // Very high chance
+        else if (value >= 70 && value <=89) colorClass = "snow-blue"; // High chance
+        else if (value >= 50 && value <=69) colorClass = "snow-purple"; // Moderate chance
+        else if (value >= 30 && value <=49) colorClass = "snow-orange"; // Mild chance
       }
 
       // Build the visual block that gets rendered
@@ -78,7 +80,7 @@ Module.register("MMM-SnowDay", {
     // Insert HTML directly into the wrapper
     wrapper.innerHTML = `
       <div class="snow-title">${titleText}</div>
-      <div class="snow-percent">${this.templateContent || "...wishing..."}</div>
+      <div class="snow-percent">${this.templateContent || "...wishing hard..."}</div>
     `;
 
     return wrapper;
