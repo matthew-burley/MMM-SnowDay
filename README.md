@@ -93,5 +93,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 ## Acknowledgements
 
 This project is based on the MMM-Template by [Dennis Rosenbaum](https://github.com/Dennis-Rosenbaum/MMM-Template).  
-Honestly Daniel made it so easy to create a module; it's scary. Thanks a million.
+Honestly Dennis made it so easy to create a module; it's scary. Thanks a million.
 The original project is licensed under the MIT License.
