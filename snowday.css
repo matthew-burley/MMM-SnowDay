@@ -29,7 +29,7 @@ max-height: 3em;           /* ~2 lines max */
 
 /* Percentage */
 .snow-percent {
-font-size: clamp(24px, 6vw, 64px);
+font-size: clamp(20px, 4vw, 48px);
 font-weight: 700;
 margin-top: 10px;
 display: block;            /* use block so width restrictions work */
