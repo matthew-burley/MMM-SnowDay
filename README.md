@@ -76,9 +76,9 @@ Configuration with all options:
 Option|Possible values|Default|Description
 ------|------|------|-----------
 `postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check [default: H3C 5L2]
-`city`|`Montréal`|""|The optional manual city name [default: Montréal]
-`updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000|The update interval [default: hourly]
-`initialDelay`|`15000`|15000|The intial delay on startup to avoid RPi boot congestion [default: 15s]
+`city`|`Montréal`|""|The optional manual city name 
+`updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000 [hourly]|The update interval
+`initialDelay`|`15000`|15000 [15s]|The intial delay on startup to avoid RPi boot congestion 
 
 ## Developer commands
 
@@ -93,5 +93,5 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE.md) f
 ## Acknowledgements
 
 This project is based on the MMM-Template by [Dennis Rosenbaum](https://github.com/Dennis-Rosenbaum/MMM-Template).  
-Honestly Daniel made it so easy to create a module its scary. Thanks a million.
+Honestly Daniel made it so easy to create a module; it's scary. Thanks a million.
 The original project is licensed under the MIT License.
