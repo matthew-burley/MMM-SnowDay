@@ -6,9 +6,17 @@
 
 ![Example of MMM-SnowDay Loading](./exampleloading.png)
 
-## Screenshot Finished
+## Screenshot Weekend/Error With Postal Code
 
-![Example of MMM-SnowDay](./examplefinished.png)
+![Example of MMM-SnowDay](./exampleweekend.png)
+
+## Screenshot 0% Chance
+
+![Example of MMM-SnowDay](./example0percentchance.png)
+
+## Screenshot 99% Change
+
+![Example of MMM-SnowDay](./example99percentchance.png)
 
 ## Installation
 
@@ -55,10 +63,10 @@ Configuration with all options:
         module: 'MMM-SnowDay',
         position: 'lower_third',
         config: {
-            postalCode: "H3C 5L2",        // postal code to check (Go Habs Go!)
-            city: "Montréal",             // optional manual city name
-            updateInterval: 60 * 60 * 1000, // updates every hour
-            initialDelay: 15000             // delays on startup to avoid RPi boot congestion
+            postalCode: "H3C 5L2",        
+            city: "Montréal",            
+            updateInterval: 60 * 60 * 1000, 
+            initialDelay: 15000            
         }
     },
 ```
@@ -67,10 +75,10 @@ Configuration with all options:
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
-`postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check
-`city`|`Montréal`|""|The optional manual city name
-`updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000|The update interval
-`initialDelay`|`15000`|15000|The intial delay on startup to avoid RPi boot congestion
+`postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check [default: H3C 5L2]
+`city`|`Montréal`|""|The optional manual city name [default: Montréal]
+`updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000|The update interval [default: hourly]
+`initialDelay`|`15000`|15000|The intial delay on startup to avoid RPi boot congestion [default: 15s]
 
 ## Developer commands
 
