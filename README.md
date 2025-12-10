@@ -75,16 +75,10 @@ Configuration with all options:
 
 Option|Possible values|Default|Description
 ------|------|------|-----------
-`postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check [default: H3C 5L2]
+`postalCode`|`H3C 5L2`|"H3C 5L2"|The postal code to check 
 `city`|`Montréal`|""|The optional manual city name 
 `updateInterval`|`60 * 60 * 1000`|60 * 60 * 1000 [hourly]|The update interval
 `initialDelay`|`15000`|15000 [15s]|The intial delay on startup to avoid RPi boot congestion 
-
-## Developer commands
-
-- `npm install` - Install devDependencies like ESLint.
-- `node --run lint` - Run linting and formatter checks.
-- `node --run lint:fix` - Fix linting and formatter issues.
 
 ## License
 
