@@ -4,7 +4,6 @@ const StealthPlugin = require('puppeteer-extra-plugin-stealth');
 
 puppeteer.use(StealthPlugin());
 
-// simple async delay helper
 function delay(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
@@ -13,11 +12,11 @@ module.exports = NodeHelper.create({
   start() {
     console.log("MMM-SnowDay helper started");
 
-    this.odometerDelay = 12000; // wait for animation
-    this.maxRetries = 3; // max retries
-    this.latestPostal = null; // last postal code
+    this.odometerDelay = 12000; // wait for odometer animation
+    this.maxRetries = 3;
+    this.latestPostal = null;
 
-    // refresh hourly
+    // hourly refresh
     setInterval(() => {
       if (this.latestPostal) {
         this.scrapeSnowPercent(this.latestPostal).then(result => {
@@ -31,12 +30,11 @@ module.exports = NodeHelper.create({
     let browser;
 
     try {
+      // Use system-installed Chromium to avoid Puppeteer ARM issues
       browser = await puppeteer.launch({
         headless: true,
-        args: [
-          '--no-sandbox',
-          '--disable-setuid-sandbox',
-        ]
+        executablePath: "/usr/bin/chromium-browser", // ensure Chromium is installed
+        args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
 
       const page = await browser.newPage();
@@ -66,7 +64,7 @@ module.exports = NodeHelper.create({
         if (btn) btn.click();
       });
 
-      // wait for result animation
+      // wait for navigation + animation
       await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 40000 });
       await delay(this.odometerDelay);
 
