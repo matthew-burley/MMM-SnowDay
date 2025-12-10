@@ -79,7 +79,7 @@ module.exports = NodeHelper.create({
 
       // extracts visible odometer digits that appear as separate elements
       const digits = await page.$$eval(
-        ".odometer-inside .odometer-value",
+        ".text-[17cqw]",
         els => els.map(e => e.textContent.trim()).filter(x => x !== "")
       );
 
@@ -91,12 +91,20 @@ module.exports = NodeHelper.create({
       // combines digits into "##%" format. Example: ["8", "7"] → "87%"
       const percent = digits.join("") + "%";
 
-      // tries to grab the city
+      // tries to grab the city (new location in h1.uppercase)
       let city = "";
       try {
         city = await page.$eval(
-          ".result-header h1 span:nth-child(2)",
-          el => el.textContent.trim()
+          "h1.uppercase",
+          el => {
+            const t = el.textContent.trim();
+            const idx = t.lastIndexOf(" in ");
+            if (idx === -1) return "";
+            // substring after " in " — expected "City, Province"
+            const after = t.slice(idx + 4).trim();
+            // return only the city part before the comma (handles "City, Province")
+            return after.split(",")[0].trim();
+          }
         );
       } catch (_) {
         city = ""; // silent fallback
