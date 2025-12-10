@@ -78,8 +78,11 @@ module.exports = NodeHelper.create({
       await delay(this.odometerDelay);
 
       // extracts visible odometer digits that appear as separate elements
+      // the site now uses a class with square brackets (e.g. text-[17cqw]).
+      // CSS escaping in a selector can be awkward; use an attribute substring
+      // match to locate elements whose class attribute contains that token.
       const digits = await page.$$eval(
-        ".text-[17cqw]",
+        '[class*="text-[17cqw]"]',
         els => els.map(e => e.textContent.trim()).filter(x => x !== "")
       );
 
@@ -91,7 +94,7 @@ module.exports = NodeHelper.create({
       // combines digits into "##%" format. Example: ["8", "7"] → "87%"
       const percent = digits.join("") + "%";
 
-      // tries to grab the city (new location in h1.uppercase)
+      // tries to grab the city (new location at the end of "Chance of a snow day in _" in h1.uppercase)
       let city = "";
       try {
         city = await page.$eval(
@@ -100,7 +103,7 @@ module.exports = NodeHelper.create({
             const t = el.textContent.trim();
             const idx = t.lastIndexOf(" in ");
             if (idx === -1) return "";
-            // substring after " in " — expected "City, Province"
+            // substring after " in " — expected "City, Province" or "City"
             const after = t.slice(idx + 4).trim();
             // return only the city part before the comma (handles "City, Province")
             return after.split(",")[0].trim();
