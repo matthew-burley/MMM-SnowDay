@@ -12,7 +12,6 @@ module.exports = NodeHelper.create({
   start() {
     console.log("MMM-SnowDay helper started");
 
-    this.odometerDelay = 12000; // wait for odometer animation
     this.maxRetries = 3;
     this.latestPostal = null;
 
@@ -30,10 +29,10 @@ module.exports = NodeHelper.create({
     let browser;
 
     try {
-      // Use system-installed Chromium to avoid Puppeteer ARM issues
+      // Use system chromium for ARM
       browser = await puppeteer.launch({
         headless: true,
-        executablePath: "/usr/bin/chromium-browser", // ensure Chromium is installed
+        executablePath: "/usr/bin/chromium-browser",
         args: ['--no-sandbox', '--disable-setuid-sandbox'],
       });
 
@@ -45,11 +44,16 @@ module.exports = NodeHelper.create({
         "Chrome/121.0.0.0 Safari/537.36"
       );
 
-      // go to main page
-      await page.goto('https://www.snowdaypredictor.com/', { waitUntil: 'networkidle2' });
+      // Load homepage
+      await page.goto('https://www.snowdaypredictor.com/', {
+        waitUntil: 'networkidle2',
+        timeout: 300000  // 5 minutes
+      });
 
-      const inputSelector = 'input[placeholder="Search your City, ZIP Code or Postal Code..."]';
-      await page.waitForSelector(inputSelector, { timeout: 20000 });
+      const inputSelector =
+        'input[placeholder="Search your City, ZIP Code or Postal Code..."]';
+
+      await page.waitForSelector(inputSelector, { timeout: 300000 });
 
       // type postal code
       await page.focus(inputSelector);
@@ -64,18 +68,26 @@ module.exports = NodeHelper.create({
         if (btn) btn.click();
       });
 
-      // wait for navigation + animation
-      await page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 40000 });
-      await delay(this.odometerDelay);
+      // Wait for navigation OR AJAX load
+      await Promise.race([
+        page.waitForNavigation({ waitUntil: 'networkidle2', timeout: 300000 }),
+        delay(4000) // sometimes no full navigation occurs; fall back after a bit
+      ]);
 
-      // scrape percent
+      // Now wait dynamically until we actually SEE something like "75%"  
+      await page.waitForFunction(() => {
+        const spans = Array.from(document.querySelectorAll("span"));
+        return spans.some(s => /^\d+%$/.test(s.textContent.trim()));
+      }, { timeout: 300000 });
+
+      // extract percent
       const percent = await page.evaluate(() => {
         const span = Array.from(document.querySelectorAll('span'))
           .find(s => /^\d+%$/.test(s.textContent.trim()));
         return span ? span.textContent.trim() : 'N/A';
       });
 
-      // scrape city
+      // extract city
       const city = await page.evaluate(() => {
         const h1 = Array.from(document.querySelectorAll('h1'))
           .find(h => h.textContent.includes("Chance of a snow day in"));
@@ -87,12 +99,15 @@ module.exports = NodeHelper.create({
 
     } catch (err) {
       console.error(`Attempt ${attempt} scrape error:`, err.message);
+
       if (attempt < this.maxRetries) {
         console.log(`Retrying scrape (attempt ${attempt + 1})...`);
-        await delay(this.odometerDelay);
+        await delay(3000);
         return this.scrapeSnowPercent(postalCode, attempt + 1);
       }
+
       return { percent: "N/A", city: "" };
+
     } finally {
       if (browser) await browser.close().catch(() => {});
     }
